@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 13px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        input.invalid {
+            border: 1px solid red;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            
+            document.querySelectorAll(".error").forEach(error => {
+                error.innerHTML = "";
+            });
+
+            document.querySelectorAll("input").forEach(input => {
+                input.classList.remove("invalid");
+            });
+
+            let firstName = document.getElementById("fname").value.trim();
+            let lastName = document.getElementById("lname").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let mobile = document.getElementById("mobile").value.trim();
+
+            let namePattern = /^[A-Za-z ]+$/;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let mobilePattern = /^[0-9]{10}$/;
+
+            if (firstName === "" || !namePattern.test(firstName)) {
+                showError("fname", "Please enter a valid First Name.");
+                valid = false;
+            }
+
+            if (lastName === "" || !namePattern.test(lastName)) {
+                showError("lname", "Please enter a valid Last Name.");
+                valid = false;
+            }
+
+            if (email === "" || !emailPattern.test(email)) {
+                showError("email", "Please enter a valid Email ID.");
+                valid = false;
+            }
+
+            if (!mobilePattern.test(mobile)) {
+                showError("mobile", "Please enter a valid 10-digit Mobile Number.");
+                valid = false;
+            }
+
+            if (valid) {
+                 alert("Form submitted successfully!");
+              return false;
+            }
+
+            return false;
+        }
+
+        function showError(id, message) {
+            document.getElementById(id).classList.add("invalid");
+            document.getElementById(id + "Error").innerHTML = message;
+        }
+
+        
+        function clearError(id) {
+            document.getElementById(id + "Error").innerHTML = "";
+            document.getElementById(id).classList.remove("invalid");
+            document.getElementById("success").innerHTML = "";
+        }
+    </script>
+</head>
+
+<body>
+
+<h1>STUDENT REGISTRATION FORM</h1>
+
+<form onsubmit="return validateForm()">
+
+<table border="1" width="100%" cellpadding="3">
+
+<tr>
+    <td>FIRST NAME:</td>
+    <td>
+        <input type="text" id="fname" maxlength="30"
+        oninput="clearError('fname')" required>
+        <span class="error" id="fnameError"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>LAST NAME:</td>
+    <td>
+        <input type="text" id="lname" maxlength="30"
+        oninput="clearError('lname')" required>
+        <span class="error" id="lnameError"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>EMAIL ID:</td>
+    <td>
+        <input type="text" id="email"
+        oninput="clearError('email')" required>
+        <span class="error" id="emailError"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>DOB:</td>
+    <td><input type="date"></td>
+</tr>
+
+<tr>
+    <td>MOBILE NUMBER:</td>
+    <td>
+        <input type="tel" id="mobile" maxlength="10"
+        oninput="clearError('mobile')" required>
+        <span class="error" id="mobileError"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>GENDER:</td>
+    <td>
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+    </td>
+</tr>
+
+<tr>
+    <td>ADDRESS:</td>
+    <td><textarea rows="3" cols="20"></textarea></td>
+</tr>
+
+<tr>
+    <td>CITY:</td>
+    <td><input type="text" maxlength="30"></td>
+</tr>
+
+<tr>
+    <td>PINCODE:</td>
+    <td><input type="text" maxlength="6"></td>
+</tr>
+
+<tr>
+    <td>STATE:</td>
+    <td><input type="text" maxlength="30"></td>
+</tr>
+
+<tr>
+    <td>COUNTRY:</td>
+    <td><input type="text" value="India"></td>
+</tr>
+
+<tr>
+    <td>HOBBIES:</td>
+    <td>
+        <input type="checkbox" name="hobbies" value="Dancing">Dancing
+        <input type="checkbox" name="hobbies" value="Singing">Singing
+        <input type="checkbox" name="hobbies" value="Painting">Painting
+        <input type="checkbox" name="hobbies" value="Other">Other
+        <input type="text" placeholder="Other hobby">
+    </td>
+</tr>
+
+<tr>
+    <td>COURSE APPLIED FOR:</td>
+    <td>
+        <input type="radio" name="course" value="MCA">MCA
+        <input type="radio" name="course" value="M.Tech">M.Tech
+        <input type="radio" name="course" value="M.Sc">M.Sc
+        <input type="radio" name="course" value="PhD">Ph.D
+    </td>
+</tr>
+
+<tr>
+    <td>PASSWORD:</td>
+    <td><input type="password" maxlength="30"></td>
+</tr>
+
+<tr>
+    <td>Date of TC:</td>
+    <td><input type="date"></td>
+</tr>
+
+<tr>
+    <td colspan="2" align="center">
+        <input type="submit" value="SUBMIT">
+        <input type="reset" value="RESET"
+        onclick="document.querySelectorAll('.error').forEach(e => e.innerHTML='');
+        document.querySelectorAll('input').forEach(i => i.classList.remove('invalid'));
+        document.getElementById('success').innerHTML='';">
+    </td>
+</tr>
+
+</table>
+
+<p id="success" style="color:green; text-align:center;"></p>
+
+</form>
+
+</body>
+</html>
+
